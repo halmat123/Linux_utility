@@ -1,0 +1,18 @@
+CC = gcc
+CFLAGS = -g -I/opt/homebrew/opt/libpng/include
+LDFLAGS = -L/opt/homebrew/opt/libpng/lib -lpng -lm
+
+SRC = demo_png.c utils.c
+OBJ = $(SRC:.c=.o)
+TARGET = cw
+
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CC) $(OBJ) -o $@ $(LDFLAGS)
+
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+clean:
+	rm -f $(OBJ) $(TARGET)
